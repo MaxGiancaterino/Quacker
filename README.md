@@ -126,6 +126,17 @@ Run `prisma deploy` while being inside your /prisma folder to deploy the changes
 Now go back a directory up to your server by running `cd ..` and run `yarn dev` and you should see your playground 🍾
 
 
+P.S: Make sure to copy your prisma endpoint that you can find in `prisma/prisma.yml` and paste it as the value for `PRISMA_ENDPOINT` in your .env file. 
+
+Your .env file should look something like this as a result:
+
+```sh
+PRISMA_ENDPOINT="https://eu1.prisma.sh/public-grovelantern-494/ix-twatter/dev"
+PRISMA_SECRET="mysecret123"
+APP_SECRET="jwtsecret123"
+```
+except, `PRISMA_ENDPOINT` will be yours, the one you found in prisma.yml.
+
 ### Get the front-end up and running
 
 1.  go into your front-end directory by doing `cd client`
@@ -380,7 +391,7 @@ Now your turn!
 1.  Here's how creating a tweet would look like in your resolvers:
 
 ```ts
-const user = await ctx.db.mutation.createTweet({
+const tweet = await ctx.db.mutation.createTweet({
   data: {
     text: args.text,
     author: {
