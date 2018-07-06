@@ -400,7 +400,7 @@ const tweet = await ctx.db.mutation.createTweet({
       }
     }
   }
-});
+}, info);
 ```
 
 2.  Make a feed query that returns a list of all the tweets (this is our twitter feed!)
