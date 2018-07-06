@@ -252,7 +252,7 @@ type User {
 
 As you can see, we have two mutations here. `signup` and `login`. They both take an email and a password and return an `AuthPayload` we've defined. This is what tells graphql what our mutations will look like, what parameters they take etc. We will now look at their _implementations_.
 
-To see that, go to `src/Mutation/auth.ts`. Here's what it looks like:
+To see that, go to `src/resolvers/Mutation/auth.ts`. Here's what it looks like:
 
 ```ts
 import * as bcrypt from "bcryptjs";
