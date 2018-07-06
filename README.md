@@ -329,7 +329,7 @@ All we are doing is simply passing the arguments, `email & password` and spreadi
 
 ```ts
 const user = await ctx.db.mutation.createUser({
-  data: { email: args.email, password: args.password }
+  data: { email: args.email, password: password }
 });
 ```
 
