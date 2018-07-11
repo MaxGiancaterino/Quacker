@@ -17,7 +17,7 @@
     "sanitize.css": "^6.0.0"
   },
   "scripts": {
-    "start": "react-scripts-ts start",
+    "start": "set PORT=5000 && react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"

@@ -1,6 +1,6 @@
 import * as React from "react"
 import gql from "graphql-tag"
-import { Query } from "react-apollo"
+import { Query, Mutation } from "react-apollo"
 
 const GET_TWEETS = gql`
   query {
@@ -15,22 +15,6 @@ const GET_TWEETS = gql`
   }
 `
 
-// interface Data {
-//   tweets: Array<Tweet>
-// }
-
-// interface Tweet {
-//   id: string
-//   text: string
-//   author: User
-// }
-
-// interface User {
-//   id: string
-//   name: string
-//   email: string
-// }
-
 class Feed extends React.Component {
   render() {
     return (
@@ -38,9 +22,8 @@ class Feed extends React.Component {
         <Query query={GET_TWEETS}>
           {({ loading, error, data }) => {
             if (loading) {
-              return "LOading..."
+              return "Loading..."
             }
-
             if (error) {
               return "OOps, somehing blew up."
             }
