@@ -39,7 +39,7 @@ class HomePage extends React.Component {
                 this.rerender()
               }}>
                 log out
-          </button>
+              </button>
             </div>
           </div>
         </div>

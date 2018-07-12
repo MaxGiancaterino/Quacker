@@ -20,3 +20,14 @@ div.tweet-author {
   font-size: 24px;
 }
 
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+
+
