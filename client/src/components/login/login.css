@@ -1,0 +1,83 @@
+/* .message {
+  margin-top: 3%;
+  font-size: 18px;
+} */
+
+.logo-invert img {
+  position: relative;
+  margin-left: auto;
+  margin-top: 8%;
+  width: 280px;
+}
+
+.id-login {
+  margin-top: 5%;
+  position: relative;
+  background-color: white;
+  width: 40%;
+  height: 50px;
+  vertical-align: center;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.pw-login {
+  position: relative;
+  background-color: white;
+  width: 40%;
+  height: 50px;
+  vertical-align: center;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.login-button {
+  margin-top: 1.5%;
+  color: #CB9898;
+  background: white;
+  border-radius: 4px;
+  margin-left: 10px;
+  width: 10%;
+  height: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  text-align: center;
+  vertical-align: center;
+  border: 0;
+}
+
+.login-button:hover {
+  background-color: rgb(187, 0, 103);
+  color: white;
+  /* border-color: rgb(255, 225, 0);
+  border-width: 5px;
+  border-style: solid; */
+  cursor: pointer;
+}
+
+.signup-button {
+  margin-top: 1.5%;
+  color: rgb(187, 0, 103);
+  border-color: rgb(187, 0, 103);
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 4px;
+  margin-left: 10px;
+  width: 10%;
+  height: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  text-align: center;
+  vertical-align: center;
+  /* border: 0; */
+}
+
+.signup-button:hover {
+  background-color: white;
+  /* border-color: rgb(255, 225, 0);
+  border-width: 5px;
+  border-style: solid; */
+  cursor: pointer;
+}
