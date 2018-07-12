@@ -1,5 +1,5 @@
 import * as React from "react"
-import Navigation from "../navigation/navigation"
+// import Navigation from "../navigation/navigation"
 import Feed from "../feed"
 import Login from "../login/login"
 import "./home-page.css"
@@ -10,31 +10,27 @@ import "./home-page.css"
 // }
 
 class HomePage extends React.Component {
-  state = {
-    isAuthenticated: localStorage.getItem('token'),
-  };
-
-  constructor(props) {
-    super(props)
-    this.rerender = this.rerender.bind(this)
-  }
-
-  rerender() {
-    this.forceUpdate();
-  }
-
   render() {
     return (
       localStorage.getItem('token') ? (
         <div>
-          <div>
-            <Feed />
-            <button onClick={() => {
-              localStorage.removeItem('token')
-              this.rerender()
-            }}>
-              log out
+          {/* <Navigation /> */}
+          <div className="body">
+            <div className="sidebar">
+              <div className="logo">
+                <img src={require("../logo.png")} />
+              </div>
+              {/* <div className="current-user"/>
+            <div className="logout"/> */}
+            </div>
+            <div className="feed"><Feed />
+              <button onClick={() => {
+                localStorage.removeItem('token')
+                this.rerender()
+              }}>
+                log out
           </button>
+            </div>
           </div>
         </div>
       ) : (
