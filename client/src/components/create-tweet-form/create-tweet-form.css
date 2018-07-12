@@ -1,0 +1,38 @@
+.form{
+  background-color: white;
+}
+
+.input-tweet {
+  position: relative;
+  background-color: white;
+  width: 75%;
+  height: 80px;
+  vertical-align: center;
+  font-size: 36px;
+  padding: 10px;
+  border: 0;
+}
+
+
+.search-button {
+  color: #CB9898;
+  background: white;
+  border-radius: 4px;
+  margin-left: 10px;
+  width: 20%;
+  height: 80px;
+  font-size: 28px;
+  font-weight: bold;
+  position: relative;
+  text-align: center;
+  vertical-align: center;
+  border: 0;
+}
+
+.search-button:hover {
+  border-color: rgb(187, 0, 103);
+  border-width: 5px;
+  border-style: solid;
+  color: rgb(187, 0, 103);
+  cursor: pointer;
+}
