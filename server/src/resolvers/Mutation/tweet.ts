@@ -1,12 +1,18 @@
-import { Context } from "../../utils"
+import { getUserId, Context } from "../../utils"
 export default {
-  createTweet: async (parent, args, ctx: Context, info) => {
-
-    return await ctx.db.mutation.createTweet(
-      {
-        data: args.data
+  async createTweet(parent, args, ctx: Context, info) {
+    const userID = getUserId(ctx)
+    const tweet = await ctx.db.mutation.createTweet({
+      data: {
+        text: args.text,
+        author: {
+          connect: {
+            id: userID
+          }
+        }
       },
-      info
-    )
-  }
+    }, info)
+    return tweet
+  },
+
 }

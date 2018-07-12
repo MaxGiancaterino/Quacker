@@ -10,6 +10,16 @@ import "./home-page.css"
 // }
 
 class HomePage extends React.Component {
+
+  constructor(props) {
+    super(props)
+
+    this.rerender = this.rerender.bind(this)
+  }
+
+  rerender() {
+    this.forceUpdate();
+  }
   render() {
     return (
       localStorage.getItem('token') ? (
