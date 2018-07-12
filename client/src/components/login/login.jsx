@@ -1,7 +1,8 @@
 import * as React from "react"
 import gql from "graphql-tag"
 import { Query, Mutation } from "react-apollo"
-import { EPERM } from "constants";
+// import { EPERM } from "constants";
+import "./login.css"
 
 const LOGIN = gql`
 mutation login($email: String!, $password: String!) {
@@ -52,6 +53,9 @@ class Login extends React.Component {
                     {(login) => {
                         return (
                             <div>
+                                <div className="logo-invert">
+                                    <img src={require("../logo-invert.png")} />
+                                </div>
                                 <form
                                     onSubmit={async (e) => {
                                         console.log("-----------------------------BEFORE LOGIN--------------------------------")
@@ -63,15 +67,14 @@ class Login extends React.Component {
                                         this.setState({ email: "", password: "", })
                                     }}
                                 >
-                                    <input
+                                    <input className="id-login" placeholder="username"
                                         onChange={(e) => {
                                             e.preventDefault()
                                             this.setState({ email: e.target.value })
-                                        }
-                                        }
+                                        }}
                                     />
                                     <br />
-                                    <input type="password"
+                                    <input className="pw-login" type="password" placeholder="password"
                                         onChange={(e) => {
                                             e.preventDefault()
                                             this.setState({ password: e.target.value })
@@ -79,13 +82,13 @@ class Login extends React.Component {
                                         }
                                     />
                                     <br />
-                                    <button type="submit">Log in</button>
-                                    <button type="button">Sign up</button>
+                                    <button className="login-button" type="submit">Login</button>
+                                    <button className="signup-button" type="submit">Sign Up</button>
                                 </form>
                             </div>)
                     }}
                 </Mutation>
-                <p>You must log in to view protected page</p>
+                {/* <p className="message">You must log in to view protected page</p> */}
             </div>
         );
     }
