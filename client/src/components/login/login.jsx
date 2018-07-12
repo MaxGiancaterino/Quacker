@@ -80,10 +80,8 @@ class Login extends React.Component {
                                     />
                                     <br />
                                     <button type="submit">Log in</button>
+                                    <button type="button">Sign up</button>
                                 </form>
-                                <div id="log">
-                                    {localStorage.getItem('token')}
-                                </div>
                             </div>)
                     }}
                 </Mutation>
