@@ -8,14 +8,13 @@ import SignUp from "./components/sign-up/sign-up"
 import "./App.css"
 
 class App extends React.Component {
-  public render() {
+  render() {
     return (
       <div className="App">
         <Switch>
           <Route exact={true} path="/" component={HomePage} />
           <Route exact={true} path="/signup" component={SignUp} />
           <Route exact={true} path="/:username" component={ProfilePage} />
-
         </Switch>
       </div>
     )

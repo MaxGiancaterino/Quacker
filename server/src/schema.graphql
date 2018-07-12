@@ -18,6 +18,8 @@ type Mutation {
   login(email: String!, password: String!): AuthPayload!
   createTweet(text: String!): Tweet!
   deleteTweet(id: ID!): Tweet!
+  signS3(filename: String!, filetype: String!): S3Payload!
+  uploadProfilePicture(name: String!, pictureUrl: String!): User!
 }
 
 type AuthPayload {
@@ -35,4 +37,9 @@ type User {
 
 type Viewer {
   me: User!
+}
+
+type S3Payload {
+  signedRequest: String!,
+  url: String!,
 }

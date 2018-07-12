@@ -11,6 +11,7 @@ const LOGIN = gql`
       token
       user {
         id
+        username
       }
     }
   }
@@ -70,6 +71,7 @@ class Login extends React.Component {
                       }
                     })
                     localStorage.setItem("token", data.login.token)
+                    localStorage.setItem("username", data.login.user.username)
                     console.log(
                       "---------------------------AUTHENTICATING---------------------------------------"
                     )

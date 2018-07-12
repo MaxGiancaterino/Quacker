@@ -1,6 +1,9 @@
 import * as bcrypt from "bcryptjs"
 import * as jwt from "jsonwebtoken"
 import { Context } from "../../utils"
+import * as aws from "aws-sdk"
+
+const s3Bucket = process.env.S3_BUCKET;
 
 export const auth = {
   async signup(parent, args, ctx: Context, info) {
@@ -30,5 +33,25 @@ export const auth = {
       token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
       user
     }
-  }
+  },
+
+  async signS3(parent, { filename, filetype }) {
+    const s3 = new aws.S3();
+
+    const s3Params = {
+      Bucket: s3Bucket,
+      Key: filename,
+      Expires: 60,
+      ContentType: filetype,
+      ACL: 'public-read',
+    };
+
+    const signedRequest = await s3.getSignedUrl('putObject', s3Params);
+    const url = `https://${s3Bucket}.s3.amazonaws.com/${filename}`;
+
+    return {
+      signedRequest,
+      url,
+    };
+  },
 }

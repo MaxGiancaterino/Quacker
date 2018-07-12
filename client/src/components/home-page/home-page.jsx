@@ -1,3 +1,5 @@
+import * as React from "react"
+import { Link } from "react-router-dom"
 // import Navigation from "../navigation/navigation"
 import React from "react"
 import Feed from "../feed"
@@ -27,6 +29,21 @@ class HomePage extends React.Component {
             <div className="logo">
               <img src={require("../logo.png")} />
             </div>
+
+            <div className="redirect-buttons">
+              <Link to={"/"}>
+                <button type="button" className="home-button">
+                  🏠
+                </button>
+              </Link>
+
+              <Link to={"/" + localStorage.getItem("username")}>
+                <button type="button" className="profile-button">
+                  👤
+                </button>
+              </Link>
+            </div>
+
             <button
               className="logout-button"
               onClick={() => {

@@ -1,6 +1,7 @@
 import * as React from "react"
 import gql from "graphql-tag"
 import { Query } from "react-apollo"
+import { Link } from "react-router-dom"
 import Tweet from "../tweet/tweet"
 import Upload from "../upload/upload"
 import "./profile-page.css"
@@ -28,6 +29,21 @@ class ProfilePage extends React.Component {
             <div className="logo">
               <img src={require("../logo.png")} />
             </div>
+
+            <div className="redirect-buttons">
+              <Link to={"/"}>
+                <button type="button" className="home-button">
+                  🏠
+                </button>
+              </Link>
+
+              <Link to={"/" + localStorage.getItem("username")}>
+                <button type="button" className="profile-button">
+                  👤
+                </button>
+              </Link>
+            </div>
+
             <button
               className="logout-button"
               onClick={() => {

@@ -8,6 +8,7 @@
     "build": "rimraf dist && graphql codegen && tsc"
   },
   "dependencies": {
+    "aws-sdk": "^2.273.1",
     "bcryptjs": "2.4.3",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
