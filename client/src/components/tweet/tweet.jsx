@@ -1,6 +1,6 @@
 import * as React from "react"
-import { Link } from "react-router-dom";
 import gql from "graphql-tag"
+import { Link } from "react-router-dom";
 import "./tweet.css"
 
 const DELETE_TWEET = gql`
@@ -17,7 +17,7 @@ class Tweet extends React.Component {
             <div className="whole-tweet">
                 <div className="tweet-text">{this.props.text}</div>
                 <div className="tweet-author">
-                    <Link to={"/" + this.props.author.username}>{this.props.author.name}</Link>
+                    <Link className="link" to={"/" + this.props.author.username}>{this.props.author.name}</Link>
                 </div>
             </div>
         )

@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Lato");
-
 * {
   background-color: #cb9898;
   font-family: "Lato";
@@ -9,6 +7,7 @@
   position: relative;
   display: flex;
   background-color: #cb9898;
+  min-height: 100vh;
 }
 
 .sidebar {
@@ -56,4 +55,14 @@
   border-width: 5px;
   border-style: solid; */
   cursor: pointer;
+}
+
+.profile-page-feed {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
 }

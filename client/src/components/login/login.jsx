@@ -3,6 +3,7 @@ import gql from "graphql-tag"
 import { Query, Mutation } from "react-apollo"
 // import { EPERM } from "constants";
 import "./login.css"
+import { Link } from "react-router-dom";
 
 const LOGIN = gql`
 mutation login($email: String!, $password: String!) {
@@ -83,7 +84,9 @@ class Login extends React.Component {
                                     />
                                     <br />
                                     <button className="login-button" type="submit">Login</button>
-                                    <button className="signup-button" type="submit">Sign Up</button>
+                                    <Link to="/signup">
+                                        <button className="signup-button" type="button">Sign Up</button>
+                                    </Link>
                                 </form>
                             </div>)
                     }}
