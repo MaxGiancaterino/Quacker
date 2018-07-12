@@ -10,7 +10,6 @@ import "./home-page.css"
 // }
 
 class HomePage extends React.Component {
-
   constructor(props) {
     super(props)
 
@@ -18,38 +17,37 @@ class HomePage extends React.Component {
   }
 
   rerender() {
-    this.forceUpdate();
+    this.forceUpdate()
   }
   render() {
-    return (
-      localStorage.getItem('token') ? (
-        <div>
-          {/* <Navigation /> */}
-          <div className="body">
-            <div className="sidebar">
-              <div className="logo">
-                <img src={require("../logo.png")} />
-              </div>
-              {/* <div className="current-user"/>
-            <div className="logout"/> */}
+    return localStorage.getItem("token") ? (
+      <div>
+        <div className="body">
+          <div className="sidebar">
+            <div className="logo">
+              <img src={require("../logo.png")} />
             </div>
-            <div className="feed"><Feed />
-              <button onClick={() => {
-                localStorage.removeItem('token')
+            <button
+              className="logout-button"
+              onClick={() => {
+                localStorage.removeItem("token")
                 this.rerender()
-              }}>
-                log out
-          </button>
-            </div>
+              }}
+            >
+              Log Out
+            </button>
+          </div>
+          <div className="feed">
+            <Feed />
           </div>
         </div>
-      ) : (
-          <div>
-            <div>
-              <Login rerender={this.rerender} />
-            </div >
-          </div>
-        )
+      </div>
+    ) : (
+      <div>
+        <div>
+          <Login rerender={this.rerender} />
+        </div>
+      </div>
     )
   }
 }
