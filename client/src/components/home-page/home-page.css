@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+*{
+  background-color: #CB9898;
+  font-family: "Lato";
+}
+
+.body {
+  position: relative;
+  display: flex;
+  background-color: #CB9898;
+}
+
+.sidebar {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  min-height: 100%;
+}
+
+.sidebar .logo img {
+  position: absolute;
+  margin-top: 20px;
+  margin-left: -124px;
+  width: 250px;
+}
