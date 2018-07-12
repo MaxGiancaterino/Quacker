@@ -2,6 +2,7 @@ import * as React from "react"
 import gql from "graphql-tag"
 import { Query } from "react-apollo"
 import Tweet from "../tweet/tweet"
+import Upload from "../upload/upload"
 import "./profile-page.css"
 
 const GET_TWEETS = gql`
@@ -20,9 +21,6 @@ const GET_TWEETS = gql`
 
 class ProfilePage extends React.Component {
   render() {
-    console.log({
-      username: this.props.match.params
-    })
     return (
       <div>
         <div className="body">
@@ -34,11 +32,12 @@ class ProfilePage extends React.Component {
               className="logout-button"
               onClick={() => {
                 localStorage.removeItem("token")
-                this.rerender()
+                //this.rerender()
               }}
             >
               Log Out
             </button>
+            <Upload />
           </div>
           <div className="profile-page-feed">
             <h1>{this.props.match.params.username}</h1>

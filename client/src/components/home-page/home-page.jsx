@@ -1,5 +1,5 @@
-import * as React from "react"
 // import Navigation from "../navigation/navigation"
+import React from "react"
 import Feed from "../feed"
 import Login from "../login/login"
 import "./home-page.css"
@@ -43,12 +43,12 @@ class HomePage extends React.Component {
         </div>
       </div>
     ) : (
+      <div>
         <div>
-          <div>
-            <Login rerender={this.rerender} />
-          </div>
+          <Login rerender={this.rerender} />
         </div>
-      )
+      </div>
+    )
   }
 }
 
