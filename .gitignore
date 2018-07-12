@@ -11,6 +11,7 @@ client/node_modules
 
 # testing
 client/coverage
+server/.env
 
 # production
 cient/build
