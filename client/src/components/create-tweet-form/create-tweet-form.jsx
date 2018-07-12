@@ -1,6 +1,7 @@
 import * as React from "react"
 import gql from "graphql-tag"
 import { Mutation } from "react-apollo"
+import "./create-tweet-form.css"
 
 const CREATE_TWEET = gql`
   mutation createTweet($text: String!) {
@@ -32,12 +33,12 @@ class CreateTweetForm extends React.Component {
                                         input.value = ""
                                     }}
                                 >
-                                    <input
+                                    <input className="input-tweet" placeholder="What's happening?"
                                         ref={node => {
                                             input = node
                                         }}
                                     />
-                                    <button type="submit">Tweet!</button>
+                                    <button className="search-button" type="submit">Quack!</button>
                                 </form>
                             </div>
                         )
