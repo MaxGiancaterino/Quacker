@@ -2,6 +2,7 @@ import * as React from "react"
 import Navigation from "../navigation/navigation"
 import Feed from "../feed"
 import Login from "../login/login"
+import "./home-page.css"
 // import { diffQueryAgainstStore } from "apollo-cache-inmemory";
 
 // const auth = {
@@ -23,22 +24,22 @@ class HomePage extends React.Component {
   }
 
   render() {
-    console.log(this.state.isAuthenticated);
     return (
       localStorage.getItem('token') ? (
         <div>
-          <Navigation />
-          <Feed />
-          <button onClick={() => {
-            localStorage.removeItem('token')
-            this.rerender()
-          }}>
-            log out
+          <div>
+            <Feed />
+            <button onClick={() => {
+              localStorage.removeItem('token')
+              this.rerender()
+            }}>
+              log out
           </button>
+          </div>
         </div>
       ) : (
           <div>
-            < div >
+            <div>
               <Login rerender={this.rerender} />
             </div >
           </div>
