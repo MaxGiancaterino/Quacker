@@ -128,3 +128,40 @@
   margin-right: auto;
   width: 60%;
 }
+
+.profile-picture {
+  align-content: center;
+  background: white;
+  margin-top: 10px;
+}
+
+.tweet-picture {
+  width: 100px;
+  height: 100px;
+}
+
+.profileDiv {
+  background-color: white;
+}
+
+.profile-modal {
+  background-color: white;
+  width: 30%;
+  height: 40%;
+}
+
+.closeModal {
+  float: right;
+}
+
+.profName {
+  background-color: white;
+  margin-top: 10px;
+  font-size: 28px;
+}
+
+.profUsername {
+  background-color: white;
+  font-size: 18px;
+  opacity: 0.5;
+}

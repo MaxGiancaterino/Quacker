@@ -10,5 +10,14 @@ export default {
       },
       info
     )
+  },
+  async user(parent, args, ctx: Context, info) {
+    const user = await ctx.db.query.user(
+      {
+        where: args.where
+      },
+      info
+    )
+    return user
   }
 }

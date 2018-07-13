@@ -17,18 +17,6 @@ const LOGIN = gql`
   }
 `
 
-// const auth = {
-//     isAuthenticated: false,
-//     authenticate(cb) {
-//         this.isAuthenticated = true;
-//         setTimeout(cb, 100); // fake async
-//     },
-//     signout(cb) {
-//         this.isAuthenticated = false;
-//         setTimeout(cb, 100);
-//     }
-// };
-
 class Login extends React.Component {
   state = {
     email: "",
@@ -71,6 +59,7 @@ class Login extends React.Component {
                       }
                     })
                     localStorage.setItem("token", data.login.token)
+                    console.log(data.login.token)
                     localStorage.setItem("username", data.login.user.username)
                     console.log(
                       "---------------------------AUTHENTICATING---------------------------------------"
@@ -81,7 +70,7 @@ class Login extends React.Component {
                 >
                   <input
                     className="id-login"
-                    placeholder="username"
+                    placeholder="email"
                     onChange={e => {
                       e.preventDefault()
                       this.setState({ email: e.target.value })

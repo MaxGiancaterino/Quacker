@@ -2,6 +2,7 @@ import * as React from "react"
 import gql from "graphql-tag"
 import { Query } from "react-apollo"
 import { Link } from "react-router-dom"
+import Modal from "react-modal"
 import Tweet from "../tweet/tweet"
 import Upload from "../upload/upload"
 import "./profile-page.css"
@@ -20,7 +21,48 @@ const GET_TWEETS = gql`
   }
 `
 
+const USER = gql`
+  query user($where: UserWhereUniqueInput!) {
+    user(where: $where) {
+      picture
+      name
+      username
+    }
+  }
+`
+
 class ProfilePage extends React.Component {
+  constructor() {
+    super()
+
+    this.state = {
+      modalIsOpen: false
+    }
+
+    this.openModal = this.openModal.bind(this)
+    this.afterOpenModal = this.afterOpenModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
+  }
+
+  openModal() {
+    if (this.props.match.params.username === localStorage.getItem("username")) {
+      this.setState({ modalIsOpen: true })
+    }
+    console.log("SETTING STATE TO TRUE")
+    console.log("TRUE STATE: " + this.state.modalIsOpen)
+  }
+
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    //this.subtitle.style.color = "#f00"
+  }
+
+  closeModal() {
+    this.setState({ modalIsOpen: false })
+    console.log("CLOSING MODAL!")
+    console.log("FALSE STATE: " + this.state.modalIsOpen)
+  }
+
   render() {
     return (
       <div>
@@ -43,20 +85,72 @@ class ProfilePage extends React.Component {
                 </button>
               </Link>
             </div>
+            <Query
+              variables={{
+                where: {
+                  username: this.props.match.params.username
+                }
+              }}
+              query={USER}
+            >
+              {({ loading, error, data, refetch }) => {
+                if (loading) {
+                  return "Loading..."
+                }
+                if (error) {
+                  console.log(this.props.match.params.username)
+                  //return "Upload a picture"
+                }
+                //console.log(data.user.picture)
+                return (
+                  <div className="profileDiv">
+                    <div className="profName">{data.user.name}</div>
+                    <br />
+                    <div className="profUsername">@{data.user.username}</div>
 
+                    <button
+                      onClick={this.openModal}
+                      className="profile-picture"
+                    >
+                      <img
+                        className="image"
+                        src={
+                          data
+                            ? data.user.picture
+                            : "https://s3.eu-west-3.amazonaws.com/quacker-profile-pictures/images/default-profile-picture.jpg"
+                        }
+                        style={{ width: 100, height: 100 }}
+                        alt="upload a picture"
+                      />
+                    </button>
+                    <Modal
+                      className="profile-modal"
+                      isOpen={this.state.modalIsOpen}
+                      onAfterOpen={this.afterOpenModal}
+                      onRequestClose={this.closeModal}
+                      contentLabel="Example Modal"
+                    >
+                      <button className="closeModal" onClick={this.closeModal}>
+                        {"\xd7"}
+                      </button>
+                      <Upload closeModal={this.closeModal} />
+                    </Modal>
+                  </div>
+                )
+              }}
+            </Query>
             <button
               className="logout-button"
               onClick={() => {
                 localStorage.removeItem("token")
-                //this.rerender()
+                localStorage.removeItem("username")
+                this.props.history.push("/")
               }}
             >
               Log Out
             </button>
-            <Upload />
           </div>
           <div className="profile-page-feed">
-            <h1>{this.props.match.params.username}</h1>
             <Query
               className="profile-feed"
               variables={{

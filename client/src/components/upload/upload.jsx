@@ -3,20 +3,19 @@ import Dropzone from "react-dropzone"
 import axios from "axios"
 import moment from "moment"
 import gql from "graphql-tag"
-import { compose, graphql } from "react-apollo"
+import { compose, graphql, Mutation } from "react-apollo"
+import "./upload.css"
 
-const uploadProfilePicture = gql`
+const UPLOAD_PROFILE_PICTURE = gql`
   mutation($name: String!, $pictureUrl: String!) {
     uploadProfilePicture(name: $name, pictureUrl: $pictureUrl) {
-      user {
-        id
-        name
-      }
+      id
+      name
     }
   }
 `
 
-const s3SignMutation = gql`
+const S3_SIGN_MUTATION = gql`
   mutation($filename: String!, $filetype: String!) {
     signS3(filename: $filename, filetype: $filetype) {
       url
@@ -24,11 +23,10 @@ const s3SignMutation = gql`
     }
   }
 `
-
-compose(
-  graphql(uploadProfilePicture, { name: "uploadProfilePicture" }),
-  graphql(s3SignMutation, { name: "s3Sign" })
-)
+// compose(
+//   graphql(uploadProfilePicture, { name: "uploadProfilePicture" }),
+//   graphql(s3SignMutation, { name: "s3Sign" })
+// )
 
 class Upload extends React.Component {
   state = {
@@ -52,6 +50,8 @@ class Upload extends React.Component {
         "Content-Type": file.type
       }
     }
+    console.log("---------------SIGNED REQUEST------------------")
+    console.log(signedRequest)
     await axios.put(signedRequest, file, options)
   }
 
@@ -65,37 +65,82 @@ class Upload extends React.Component {
     return newFilename.substring(0, 60)
   }
 
-  submit = async () => {
-    const { name, file } = this.state
-    const response = await s3Sign({
-      variables: {
-        filename: this.formatFilename(file.name),
-        filetype: file.type
-      }
-    })
+  // submit = async () => {
+  //   const { name, file } = this.state
+  //   const filename = this.formatFilename(file.name)
+  //   console.log(filename)
+  //   const response = await s3Sign({
+  //     variables: {
+  //       filename,
+  //       filetype: file.type
+  //     }
+  //   })
+  //   console.log(response)
+  //   const { signedRequest, url } = response.data.signS3
+  //   await this.uploadToS3(file, signedRequest)
 
-    const { signedRequest, url } = response.data.signS3
-    await this.uploadToS3(file, signedRequest)
-
-    const graphqlResponse = await uploadProfilePicture({
-      variables: {
-        name,
-        pictureUrl: url
-      }
-    })
-  }
+  //   const graphqlResponse = await upload({
+  //     variables: {
+  //       name,
+  //       pictureUrl: url
+  //     }
+  //   })
+  // }
 
   render() {
     return (
-      <div>
-        <input name="name" onChange={this.onChange} value={this.state.name} />
-        <Dropzone onDrop={this.onDrop}>
-          <p>
-            Try dropping some files here, or click to select files to upload.
-          </p>
-        </Dropzone>
-        <button onClick={this.submit}>Submit</button>
-      </div>
+      <Mutation mutation={S3_SIGN_MUTATION}>
+        {signS3 => {
+          return (
+            <Mutation mutation={UPLOAD_PROFILE_PICTURE}>
+              {uploadProfilePicture => {
+                return (
+                  <div className="dropzoneDiv">
+                    <Dropzone onDrop={this.onDrop}>
+                      Drag or click to upload a file
+                    </Dropzone>
+                    <button
+                      onClick={async () => {
+                        const { name, file } = this.state
+                        const filename = this.formatFilename(file.name)
+                        console.log(filename)
+                        const response = await signS3({
+                          variables: {
+                            filename,
+                            filetype: file.type
+                          }
+                        })
+                        console.log(response.data.signS3.signedRequest)
+                        const { signedRequest, url } = response.data.signS3
+                        await this.uploadToS3(file, signedRequest)
+                        console.log(
+                          "--------------------URL-------------------"
+                        )
+                        console.log(url)
+                        await uploadProfilePicture({
+                          variables: {
+                            name,
+                            pictureUrl: url
+                          }
+                        })
+                        this.props.closeModal()
+                        // const graphqlResponse = await upload({
+                        //   variables: {
+                        //     name,
+                        //     pictureUrl: url
+                        //   }
+                        // })
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                )
+              }}
+            </Mutation>
+          )
+        }}
+      </Mutation>
     )
   }
 }

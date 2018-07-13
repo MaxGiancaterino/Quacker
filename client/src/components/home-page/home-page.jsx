@@ -47,6 +47,7 @@ class HomePage extends React.Component {
               className="logout-button"
               onClick={() => {
                 localStorage.removeItem("token")
+                localStorage.removeItem("username")
                 this.rerender()
               }}
             >

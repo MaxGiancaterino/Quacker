@@ -6,6 +6,10 @@ import "sanitize.css/sanitize.css"
 import App from "./App"
 import "./index.css"
 import client from "./apollo"
+// import JavascriptTimeAgo from "javascript-time-ago"
+// import en from "javascript-time-ago/locale/en"
+
+// JavascriptTimeAgo.locale(en)
 
 ReactDOM.render(
   <BrowserRouter>

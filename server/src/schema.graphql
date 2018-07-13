@@ -2,6 +2,7 @@
 
 type Query {
   viewer: Viewer
+  user(where: UserWhereUniqueInput!): User!
   tweets(
     where: TweetWhereInput
     orderBy: TweetOrderByInput
@@ -14,7 +15,12 @@ type Query {
 }
 
 type Mutation {
-  signup(email: String!, password: String!, name: String!, username: String!): AuthPayload!
+  signup(
+    email: String!
+    password: String!
+    name: String!
+    username: String!
+  ): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
   createTweet(text: String!): Tweet!
   deleteTweet(id: ID!): Tweet!
@@ -33,6 +39,7 @@ type User {
   email: String!
   name: String!
   tweets: [Tweet!]!
+  picture: String!
 }
 
 type Viewer {
@@ -40,6 +47,6 @@ type Viewer {
 }
 
 type S3Payload {
-  signedRequest: String!,
-  url: String!,
+  signedRequest: String!
+  url: String!
 }

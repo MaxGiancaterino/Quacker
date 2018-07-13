@@ -3,7 +3,9 @@ import * as jwt from "jsonwebtoken"
 import { Context } from "../../utils"
 import * as aws from "aws-sdk"
 
-const s3Bucket = process.env.S3_BUCKET;
+const s3Bucket = process.env.S3_BUCKET
+console.log("-------------------HERE IS THE BUCKET----------------------------")
+console.log(s3Bucket)
 
 export const auth = {
   async signup(parent, args, ctx: Context, info) {
@@ -36,22 +38,25 @@ export const auth = {
   },
 
   async signS3(parent, { filename, filetype }) {
-    const s3 = new aws.S3();
+    const s3 = new aws.S3({
+      signatureVersion: "v4",
+      region: "eu-west-3"
+    })
 
     const s3Params = {
       Bucket: s3Bucket,
       Key: filename,
       Expires: 60,
       ContentType: filetype,
-      ACL: 'public-read',
-    };
+      ACL: "public-read"
+    }
 
-    const signedRequest = await s3.getSignedUrl('putObject', s3Params);
-    const url = `https://${s3Bucket}.s3.amazonaws.com/${filename}`;
+    const signedRequest = await s3.getSignedUrl("putObject", s3Params)
+    const url = `https://${s3Bucket}.s3.amazonaws.com/${filename}`
 
     return {
       signedRequest,
-      url,
-    };
-  },
+      url
+    }
+  }
 }
