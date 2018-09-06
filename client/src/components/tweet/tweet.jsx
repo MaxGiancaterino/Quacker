@@ -2,6 +2,7 @@ import * as React from "react"
 import gql from "graphql-tag"
 import { Query } from "react-apollo"
 import { Link } from "react-router-dom"
+import Moment from "react-moment"
 import "./tweet.css"
 
 const DELETE_TWEET = gql`
@@ -45,7 +46,7 @@ class Tweet extends React.Component {
               <div className="tweet-picture">
                 <img
                   src={
-                    data
+                    data.user.picture
                       ? data.user.picture
                       : "https://s3.eu-west-3.amazonaws.com/quacker-profile-pictures/images/default-profile-picture.jpg"
                   }
@@ -62,6 +63,9 @@ class Tweet extends React.Component {
               {this.props.author.name}
             </Link>
             <span className="handle">{"@" + this.props.author.username}</span>
+            <Moment className="timefrom" fromNow ago>
+              {this.props.createdAt}
+            </Moment>
           </div>
           <div className="tweet-text">{this.props.text}</div>
         </div>

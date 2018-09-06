@@ -3,7 +3,7 @@ endpoint: https://eu1.prisma.sh/max-giancaterino-9830e5/tweeter/dev
 
 datamodel: datamodel.graphql
 
-secret: ${env:PRISMA_SECRET}
+disableAuth: true
 
 hooks:
   post-deploy:

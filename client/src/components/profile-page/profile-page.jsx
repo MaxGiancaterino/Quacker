@@ -12,6 +12,7 @@ const GET_TWEETS = gql`
     tweets(orderBy: createdAt_DESC, where: $where) {
       id
       text
+      createdAt
       author {
         id
         name
@@ -115,7 +116,7 @@ class ProfilePage extends React.Component {
                       <img
                         className="image"
                         src={
-                          data
+                          data.user.picture
                             ? data.user.picture
                             : "https://s3.eu-west-3.amazonaws.com/quacker-profile-pictures/images/default-profile-picture.jpg"
                         }
@@ -172,13 +173,7 @@ class ProfilePage extends React.Component {
                 return (
                   <div>
                     {data.tweets.map(tweet => {
-                      return (
-                        <Tweet
-                          key={tweet.id}
-                          text={tweet.text}
-                          author={tweet.author}
-                        />
-                      )
+                      return <Tweet key={tweet.id} {...tweet} />
                     })}
                   </div>
                 )

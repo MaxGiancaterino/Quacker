@@ -5899,6 +5899,10 @@ react-modal@^3.4.4, react-modal@^3.5.1:
     react-lifecycles-compat "^3.0.0"
     warning "^3.0.0"
 
+react-moment@^0.7.9:
+  version "0.7.9"
+  resolved "https://registry.yarnpkg.com/react-moment/-/react-moment-0.7.9.tgz#fc6b5bf8952d27f134a42abfd7f42df2c839c1d7"
+
 react-responsive-ui@^0.12.21:
   version "0.12.21"
   resolved "https://registry.yarnpkg.com/react-responsive-ui/-/react-responsive-ui-0.12.21.tgz#bc9f2f264745399f7ebf9ca82b9d1ef317da296d"

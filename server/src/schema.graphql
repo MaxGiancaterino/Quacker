@@ -39,7 +39,7 @@ type User {
   email: String!
   name: String!
   tweets: [Tweet!]!
-  picture: String!
+  picture: String
 }
 
 type Viewer {

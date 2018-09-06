@@ -52,25 +52,37 @@ class Login extends React.Component {
                       "-----------------------------BEFORE LOGIN--------------------------------"
                     )
                     e.preventDefault()
-                    const { data } = await login({
-                      variables: {
-                        email: this.state.email,
-                        password: this.state.password
-                      }
-                    })
-                    localStorage.setItem("token", data.login.token)
-                    console.log(data.login.token)
-                    localStorage.setItem("username", data.login.user.username)
-                    console.log(
-                      "---------------------------AUTHENTICATING---------------------------------------"
-                    )
-                    this.props.rerender()
-                    this.setState({ email: "", password: "" })
+                    try {
+                      const { data } = await login({
+                        variables: {
+                          email: this.state.email,
+                          password: this.state.password
+                        }
+                      })
+                      localStorage.setItem("token", data.login.token)
+                      console.log(data.login.token)
+                      localStorage.setItem("username", data.login.user.username)
+                      console.log(
+                        "---------------------------AUTHENTICATING---------------------------------------"
+                      )
+                      document.getElementById("alert").innerText = ""
+                    } catch (e) {
+                      document.getElementById("alert").innerText =
+                        "Invalid login credentials"
+                    } finally {
+                      this.setState({ email: "", password: "" })
+                      this.props.rerender()
+                    }
+
+                    // this.props.rerender()
+                    // this.setState({ email: "", password: "" })
                   }}
                 >
+                  <div id="alert" />
                   <input
                     className="id-login"
                     placeholder="email"
+                    value={this.state.email}
                     onChange={e => {
                       e.preventDefault()
                       this.setState({ email: e.target.value })
@@ -81,6 +93,7 @@ class Login extends React.Component {
                     className="pw-login"
                     type="password"
                     placeholder="password"
+                    value={this.state.password}
                     onChange={e => {
                       e.preventDefault()
                       this.setState({ password: e.target.value })

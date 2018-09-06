@@ -7,9 +7,10 @@ import "./feed.css"
 
 const GET_TWEETS = gql`
   query {
-    tweets(orderBy: createdAt_DESC){
+    tweets(orderBy: createdAt_DESC) {
       id
       text
+      createdAt
       author {
         id
         name
@@ -29,19 +30,14 @@ class Feed extends React.Component {
               return "Loading..."
             }
             if (error) {
-              return "OOps, somehing blew up."
+              return "Error retrieving tweets"
             }
 
             return (
               <div>
                 <CreateTweetForm refetchFeedTweets={refetch} />
                 {data.tweets.map(tweet => {
-                  console.log("----------------" + tweet.text);
-                  return (<Tweet
-                    key={tweet.id}
-                    text={tweet.text}
-                    author={tweet.author}
-                  />)
+                  return <Tweet key={tweet.id} {...tweet} />
                 })}
               </div>
             )

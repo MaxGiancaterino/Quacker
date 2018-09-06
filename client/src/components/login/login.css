@@ -33,7 +33,7 @@
 
 .login-button {
   margin-top: 1.5%;
-  color: #CB9898;
+  color: #cb9898;
   background: white;
   border-radius: 4px;
   margin-left: 10px;
@@ -80,4 +80,9 @@
   border-width: 5px;
   border-style: solid; */
   cursor: pointer;
+}
+
+#alert {
+  font-size: 24px;
+  color: rgb(194, 0, 81);
 }

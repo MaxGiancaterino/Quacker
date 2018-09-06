@@ -14,7 +14,7 @@ client/coverage
 server/.env
 
 # production
-cient/build
+client/build
 
 # misc
 */.DS_Store

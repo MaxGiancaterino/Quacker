@@ -12,41 +12,52 @@ const CREATE_TWEET = gql`
 `
 
 class CreateTweetForm extends React.Component {
-    render() {
-        let input
+  state = {
+    tweetText: ""
+  }
+  render() {
+    let input
 
-        return (
-            <div>
-                <Mutation mutation={CREATE_TWEET}>
-                    {(createTweet, { data }) => {
-                        return (
-                            <div>
-                                <form
-                                    onSubmit={async e => {
-                                        e.preventDefault()
-                                        await createTweet({
-                                            variables: {
-                                                text: input.value
-                                            }
-                                        })
-                                        this.props.refetchFeedTweets()
-                                        input.value = ""
-                                    }}
-                                >
-                                    <input className="input-tweet" placeholder="What's happening?"
-                                        ref={node => {
-                                            input = node
-                                        }}
-                                    />
-                                    <button className="search-button" type="submit">Quack!</button>
-                                </form>
-                            </div>
-                        )
+    return (
+      <div>
+        <Mutation mutation={CREATE_TWEET}>
+          {(createTweet, { data }) => {
+            return (
+              <div>
+                <form
+                  onSubmit={async e => {
+                    e.preventDefault()
+                    if (this.state.tweetText) {
+                      await createTweet({
+                        variables: {
+                          text: this.state.tweetText
+                        }
+                      })
+                      this.props.refetchFeedTweets()
+                      this.setState({ tweetText: "" })
+                    }
+                  }}
+                >
+                  <input
+                    className="input-tweet"
+                    placeholder="What's happening?"
+                    value={this.state.tweetText}
+                    onChange={e => {
+                      e.preventDefault()
+                      this.setState({ tweetText: e.target.value })
                     }}
-                </Mutation>
-            </div>
-        )
-    }
+                  />
+                  <button className="search-button" type="submit">
+                    Quack!
+                  </button>
+                </form>
+              </div>
+            )
+          }}
+        </Mutation>
+      </div>
+    )
+  }
 }
 
 export default CreateTweetForm

@@ -14,7 +14,7 @@ div.whole-tweet {
 div.tweet-text {
   background-color: white;
   padding: 10px;
-  font-size: 24px;
+  font-size: 21px;
   border-color: white;
   border-width: 3px;
   border-style: solid;
@@ -47,4 +47,10 @@ div.tweet-author {
   opacity: 0.5;
   background-color: white;
   font-size: 26px;
+}
+.timefrom {
+  background-color: white;
+  font-size: 20px;
+  margin-left: 10px;
+  opacity: 0.5;
 }
