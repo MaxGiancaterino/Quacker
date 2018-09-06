@@ -3,5 +3,9 @@ This is a simplified clone of Twitter using React for frontend and Graphql/Prism
 ## Usage
 To run the backend:
 ```
-yarn dev
+cd server && yarn dev
+```
+To run frontend:
+```
+cd client && yarn start
 ```
